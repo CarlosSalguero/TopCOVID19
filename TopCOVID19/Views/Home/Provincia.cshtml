@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron text-center">
+    <h1>TOP COVID19 2021</h1>
+</div>
+
+<div class="d-flex flex-column">
+
+
+    <div class="d-flex flex-row">
+
+        @using (Html.BeginForm("Provincia", "Home", FormMethod.Post))
+        {
+            <div class="p-2">
+                <select name="regiones" class="form-select" aria-label="Default select example">
+                    <option value="0" selected>Regions</option>
+                    @{ int index = 0;}
+                    @foreach (var region in @ViewBag.regiones)
+                    {
+                        index++;
+                        <option value="@region.iso">@region.iso</option>
+                    }
+
+
+                </select>
+            </div>
+            <div class="p-2">
+                <input type="submit" class="btn btn-primary" value="Report" />
+            </div>
+
+        }
+
+
+        @*<div class="p-2">*@
+        @using (Html.BeginForm("getXML", "Home", FormMethod.Get))
+        {
+            <div class="p-2">
+                <button type="submit" class="btn btn-secondary">XML</button>
+            </div>
+            @*<button type="submit" class="btn btn-secondary">XML</button>*@
+
+        }
+        @using (Html.BeginForm("getXML", "Home", FormMethod.Get))
+        {
+            <div class="p-2">
+                <button type="button" class="btn btn-success">JSON</button>
+            </div>
+
+        }
+        @using (Html.BeginForm("getXML", "Home", FormMethod.Get))
+        {
+            <div class="p-2">
+                <button type="button" class="btn btn-danger">CSV</button>
+            </div>
+
+        }
+        @*<button type="button" class="btn btn-secondary">XML</button>*@
+
+
+        @*</div>*@
+
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">@ViewBag.titulo1</th>
+                    <th scope="col">@ViewBag.titulo2</th>
+                    <th scope="col">@ViewBag.titulo3</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var regCasos in @ViewBag.casosRegiones)
+                {
+                    <tr>
+                        <td>@regCasos.name</td>
+                        <td>@regCasos.cases</td>
+                        <td>@regCasos.deaths</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
